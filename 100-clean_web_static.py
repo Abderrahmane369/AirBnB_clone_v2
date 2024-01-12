@@ -15,7 +15,7 @@ def do_clean(number=0):
     if number == 0:
         number = 1
 
-    def istgz(e): return srch('web_static_\d+\.tgz', e) != -1
+    def istgz(e): return srch('web_static_[0-9]+[.]tgz', e) != -1
 
     archives = [_ for _ in vers.stdout.split('\n') if istgz(_)]
 

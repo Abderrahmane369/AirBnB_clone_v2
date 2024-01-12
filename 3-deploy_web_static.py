@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """ azea"""
 from fabric.api import put, run, env, local
-import os
+from os.path import isfile
+from datetime import datetime as dtime
 env.hosts = ['54.144.144.29', '54.158.205.242']
 
 

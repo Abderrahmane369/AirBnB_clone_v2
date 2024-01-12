@@ -8,6 +8,7 @@ env.hosts = ['54.158.205.242', '54.144.144.29']
 
 
 def do_clean(number=0):
+    """zeeazazezaezeaz"""
     vers = local('ls -tr versions', capture=True)
 
     number = int(number)

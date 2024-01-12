@@ -15,7 +15,7 @@ def do_pack():
     path = "{}{}{}{}{}{}{}.tgz".format(
         a, dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second
     )
-    r = local(f"tar -czvf {path}.tgz web_static")
+    r = local(f"tar -czvf {path} web_static")
 
     return path if r.failed else None
 

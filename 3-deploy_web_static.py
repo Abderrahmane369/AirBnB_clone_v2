@@ -1,15 +1,19 @@
 #!/usr/bin/python3
-"""azezaeae"""
+"""
+This is the 2-do_deploy_web_static.py module.
+This module distribute the static content (html, css, images) to the servers
+"""
+
+
 from fabric.api import put, run, env
 import os
 env.hosts = ['54.144.144.29', '54.158.205.242']
 
 
-def do_deploy():
+def do_deploy(archive_path):
     """ This is the function for deploying the content """
     if os.path.exists(archive_path) is False:
         return False
-
     try:
         p = "/data/web_static/releases/"
         file_name = archive_path.split('/')[1]

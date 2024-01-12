@@ -9,9 +9,10 @@ def do_pack():
     dt = dtime.now()
 
     local("mkdir -p versions")
-    a = "tar -czvf versions/web_static_"
-    r = local("{}{}{}{}{}{}{}.tgz web_static".format(
+    a = "versions/web_static_"
+    path = "{}{}{}{}{}{}{}.tgz".format(
         a, dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second
-    ))
+    )
+    r = local(f"tar -czvf {path}.tgz web_static")
 
-    return None if r.failed else None
+    return path if r.failed else None

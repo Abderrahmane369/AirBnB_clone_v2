@@ -48,6 +48,7 @@ def do_deploy(archive_path):
 
 
 def deploy():
+    """azzeezezaazz"""
     archive = do_pack()
 
     if archive is None:

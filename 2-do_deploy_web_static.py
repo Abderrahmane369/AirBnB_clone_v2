@@ -14,7 +14,6 @@ def do_deploy(archive_path):
 
     tgz = archive_path.split("/")[1]
     fname = tgz[:-4]
-
     a = put(archive_path, '/tmp/')
     b = run('rm -rf /data/web_static/releases/*')
     c = run('mkdir -p /data/web_static/releases/' + fname + '/')
@@ -24,13 +23,10 @@ def do_deploy(archive_path):
     e = run('rm -rf /tmp/' + tgz)
     f = run('mv /data/web_static/releases/' + fname +
             '/web_static/* /data/web_static/releases/' + fname + '/')
-
     g = run('rm -rf /data/web_static/releases/' + fname + '/web_static')
     h = run('rm -rf /data/web_static/current')
     k = run('ln -s /data/web_static/releases/' + fname +
             '/ /data/web_static/current')
-
     f0 = a.failed or b.failed or c.failed or d.failed or e.failed
     f1 = f.failed or g.failed or h.failed or k.failed
-
     return False if f1 else True

@@ -9,7 +9,10 @@ env.hosts = ['54.158.205.242', '54.144.144.29']
 
 def do_clean(number=0):
     """zeeazazezaezeaz"""
-    vers = local('ls -tr versions', capture=True)
+    vers = local('ls -tr versions', capture=True).stdout
+    
+    if vers.find('ls: cannot access') != -1:
+        return
 
     number = int(number)
 
@@ -18,7 +21,7 @@ def do_clean(number=0):
 
     def istgz(e): return srch('web_static_[0-9]+[.]tgz', e) != -1
 
-    archives = [_ for _ in vers.stdout.split('\n') if istgz(_)]
+    archives = [_ for _ in vers.split('\n') if istgz(_)]
 
     if number > len(archives) or number < 0:
         return

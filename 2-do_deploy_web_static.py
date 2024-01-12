@@ -17,12 +17,14 @@ def do_deploy(archive_path):
     a = put(archive_path, '/tmp/')
     b = run('rm -rf /data/web_static/releases/*')
     c = run('mkdir -p /data/web_static/releases/' + fname + '/')
-    d = run('tar -xzf /tmp/' + tgz + ' -C /data/web_static/releases/' + fname
-            + '/')
+    d = run('tar -xzf /tmp/' + tgz +
+            ' -C /data/web_static/releases/' + fname + '/')
     e = run('rm -rf /tmp/' + tgz)
     f = run('mv /data/web_static/releases/' + fname +
-            '/web_static/* /data/web_static/releases/' + fname + '/')
-    g = run('rm -rf /data/web_static/releases/' + fname + '/web_static')
+            '/web_static/* /data/web_static/releases/'
+            + fname + '/')
+    g = run('rm -rf /data/web_static/releases/' + fname
+            + '/web_static')
     h = run('rm -rf /data/web_static/current')
     k = run('ln -s /data/web_static/releases/' + fname +
             '/ /data/web_static/current')

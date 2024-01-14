@@ -27,7 +27,7 @@ file {'/data/web_static/current':
 }
 
 file {'/data/':
-  ensure  => directory
+  ensure  => directory,
   recurse => true,
   group   =>'ubuntu',
   owner   => 'ubuntu'

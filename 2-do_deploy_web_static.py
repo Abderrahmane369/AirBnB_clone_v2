@@ -1,35 +1,28 @@
 #!/usr/bin/python3
-"""
-This is the 2-do_deploy_web_static.py module.
-This module distribute the static content (html, css, images) to the servers
-"""
+# deploying
+from fabric.api import local, put, run, env
+from datetime import datetime
 
-
-from fabric.api import put, run, env, task
-import os
-env.hosts = ['52.91.182.154', '34.202.164.102']
 env.user = 'ubuntu'
-env.key_filename = '~/.ssh/id_rsa'
+env.hosts = ['52.3.243.233', '18.204.20.81']
 
 
 def do_deploy(archive_path):
-    """ This is the function for deploying the content """
-    if os.path.exists(archive_path) is False:
-        return False
+    """Deploy the boxing package tgz file
+    """
     try:
-        p = "/data/web_static/releases/"
-        file_name = archive_path.split('/')[1]
-        no_ext = file_name.split('.')[0]
-        sym_link = "/data/web_static/current"
-        put(archive_path, "/tmp/")
-        run("mkdir -p /data/web_static/releases/" + no_ext + "/")
-        run("tar -xzf /tmp/" + file_name + " -C " + p + no_ext + "/")
-        run("rm -rf /tmp/" + file_name)
-        run("mv " + p + no_ext + "/web_static/* " + p + no_ext + "/")
-        run("rm -rf /tmp/" + file_name)
-        run("rm -rf /data/web_static/releases/" + no_ext + "/web_static")
-        run("rm -rf " + sym_link)
-        run("ln -s /data/web_static/releases/" + no_ext + "/ " + sym_link)
+        archive = archive_path.split('/')[-1]
+        path = '/data/web_static/releases/' + archive.strip('.tgz')
+        current = '/data/web_static/current'
+        put(archive_path, '/tmp')
+        run('mkdir -p {}/'.format(path))
+        run('tar -xzf /tmp/{} -C {}'.format(archive, path))
+        run('rm /tmp/{}'.format(archive))
+        run('mv {}/web_static/* {}'.format(path, path))
+        run('rm -rf {}/web_static'.format(path))
+        run('rm -rf {}'.format(current))
+        run('ln -s {} {}'.format(path, current))
+        print('New version deployed!')
         return True
-    except Exception:
+    except:
         return False

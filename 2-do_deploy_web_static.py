@@ -4,7 +4,7 @@ from fabric.api import local, put, run, env
 from datetime import datetime
 
 env.user = 'ubuntu'
-env.hosts = ['52.3.243.233', '18.204.20.81']
+env.hosts = ['54.144.144.29', '54.158.205.242']
 
 
 def do_deploy(archive_path):

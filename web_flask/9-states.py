@@ -21,11 +21,9 @@ def states():
 
 
 @app.route('/states/<id>', strict_slashes=False)
-def states(id=None):
+def states_id(id=None):
     """states"""
-    state = None
-    if id:
-        state = storage.all(State).get(f'State.{id}')
+    state = storage.all(State).get(f'State.{id}')
     return render_template('9-states.html', state=state)
 
 

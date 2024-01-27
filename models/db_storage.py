@@ -36,6 +36,7 @@ class DBStorage():
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
+        """logarrihmit"""
         if cls:
             objects = self.__session.query(cls).all()
 
